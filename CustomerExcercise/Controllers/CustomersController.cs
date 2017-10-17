@@ -18,16 +18,32 @@ namespace CustomerExcercise.Controllers
         private CustomerExcerciseContext db = new CustomerExcerciseContext();
 
         // GET: api/Customers
-        public IQueryable<Customer> GetCustomers()
+        public IQueryable<CustomerDTO> GetCustomers()
         {
-            return db.Customers;
+            var customers = from c in db.Customers
+                            select new CustomerDTO()
+                            {
+                                Id = c.Id,
+                                Name = c.Name,
+                                Surname = c.Surname
+                            };
+
+            return customers;
         }
 
         // GET: api/Customers/5
-        [ResponseType(typeof(Customer))]
+        [ResponseType(typeof(CustomerDetailsDTO))]
         public async Task<IHttpActionResult> GetCustomer(int id)
         {
-            Customer customer = await db.Customers.FindAsync(id);
+            var customer = await db.Customers.Select(c =>
+            new CustomerDetailsDTO()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Surname = c.Surname,
+                Number = c.Number,
+                Address = c.Address
+            }).SingleOrDefaultAsync(c => c.Id == id);
             if (customer == null)
             {
                 return NotFound();
@@ -82,6 +98,15 @@ namespace CustomerExcercise.Controllers
 
             db.Customers.Add(customer);
             await db.SaveChangesAsync();
+
+            var dto = new CustomerDetailsDTO()
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                Surname = customer.Surname,
+                Number = customer.Number,
+                Address = customer.Address
+            };
 
             return CreatedAtRoute("DefaultApi", new { id = customer.Id }, customer);
         }
