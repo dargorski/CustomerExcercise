@@ -4,10 +4,10 @@
     self.error = ko.observable(); //contains an error message if an AJAX call fails
     self.detail = ko.observable();
     self.newCustomer = {
-        Name = ko.observable(),
-        Surname = ko.observable(),
-        Number = ko.observable(),
-        Address = ko.observable()
+        Name: ko.observable(),
+        Surname: ko.observable(),
+        Number: ko.observable(),
+        Address: ko.observable()
     }
 
     var customersUri = '/api/customers/';
@@ -25,7 +25,20 @@
         });
 
     }
-    
+    self.addCustomer = function (formElement) {
+        var customer = {
+            Name: self.newCustomer.Name(),
+            Surname: self.newCustomer.Surname(),
+            Number: self.newCustomer.Number(),
+            Address: self.newCustomer.Address()
+        };
+
+        ajaxHelper(customersUri, 'POST', customer).done(function (item) {
+            self.customers.push(item);
+        });
+    }
+
+
     self.getCustomerDetail = function (item) {
         ajaxHelper(customersUri + item.Id, 'GET').done(function (data) {
             self.detail(data)
