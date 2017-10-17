@@ -20,5 +20,7 @@ namespace CustomerExcercise.Models
         }
 
         public System.Data.Entity.DbSet<CustomerExcercise.Models.Customer> Customers { get; set; }
+
+
     }
 }

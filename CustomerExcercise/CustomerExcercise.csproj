@@ -194,6 +194,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerDetailsDTO.cs" />
+    <Compile Include="Models\CustomerDTO.cs" />
     <Compile Include="Models\CustomerExcerciseContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
