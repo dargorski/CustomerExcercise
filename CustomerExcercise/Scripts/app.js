@@ -2,6 +2,13 @@
     var self = this;
     self.customers = ko.observableArray(); //hold the list of customers
     self.error = ko.observable(); //contains an error message if an AJAX call fails
+    self.detail = ko.observable();
+    self.newCustomer = {
+        Name = ko.observable(),
+        Surname = ko.observable(),
+        Number = ko.observable(),
+        Address = ko.observable()
+    }
 
     var customersUri = '/api/customers/';
 
@@ -18,7 +25,12 @@
         });
 
     }
-
+    
+    self.getCustomerDetail = function (item) {
+        ajaxHelper(customersUri + item.Id, 'GET').done(function (data) {
+            self.detail(data)
+        });
+    }
     //call to get the list of customers, than push result into the customers array
     function getAllCustomers() {
         ajaxHelper(customersUri, 'GET').done(function (data) {
@@ -28,5 +40,6 @@
 
     getAllCustomers();
 }
+
 
 ko.applyBindings(new ViewModel()); //takes the view model as a parameter and sets up the data binding
