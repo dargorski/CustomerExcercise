@@ -37,6 +37,10 @@
             self.customers.push(item);
         });
     }
+    self.deleteCustomer = function (item) {
+        ajaxHelper(customersUri + item.Id, 'DELETE').done();
+        getAllCustomers();
+    }
 
 
     self.getCustomerDetail = function (item) {
