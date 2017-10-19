@@ -34,12 +34,18 @@
                 <h2 class="panel-title">Detail</h2>
             </div>
             <div class="panel-body">
-                <input type="text" class="form-control" id="inputName" data-bind="value: detail().Name" />
-                <input type="text" class="form-control" id="inputName" data-bind="value: detail().Surname" />
-                <input type="text" class="form-control" id="inputName" data-bind="value: detail().Number" />
-                <input type="text" class="form-control" id="inputName" data-bind="value: detail().Surname" />
-                
-            </div>
+                <form class="form-horizontal" data-bind="submit: updateCustomer">
+                    <input type="hidden" class="form-control" data-bind="value: detail().Id"/>
+                    <input type="text" class="form-control" id="inputName" data-bind="value: detail().Name" />
+                    <input type="text" class="form-control" id="inputName" data-bind="value: detail().Surname" />
+                    <input type="text" class="form-control" id="inputName" data-bind="value: detail().Number" />
+                    <input type="text" class="form-control" id="inputName" data-bind="value: detail().Surname" />
+                    <button type="submit" class="btn btn-default">Submit</button>
+
+
+</form>
+</div>
+
         </div>
     </div>
 

@@ -9,6 +9,13 @@
         Number: ko.observable(),
         Address: ko.observable()
     }
+    self.newDataForCustomer = {
+        Id: ko.observable(),
+        Name: ko.observable(),
+        Surname: ko.observable(),
+        Number: ko.observable(),
+        Address: ko.observable()
+    }
 
     var customersUri = '/api/customers/';
 
@@ -25,6 +32,7 @@
         });
 
     }
+    
     self.addCustomer = function (formElement) {
         var customer = {
             Name: self.newCustomer.Name(),
@@ -39,6 +47,7 @@
     }
     self.deleteCustomer = function (item) {
         ajaxHelper(customersUri + item.Id, 'DELETE').done();
+        console.log(item.Id);
         getAllCustomers();
     }
 
@@ -56,6 +65,20 @@
     }
 
     getAllCustomers();
+
+    self.updateCustomer = function (formElement, id) {
+        var customer = {
+            Id: self.newDataForCustomer.Id(),
+            Name: self.newDataForCustomer.Name(),
+            Surname: self.newDataForCustomer.Surname(),
+            Number: self.newDataForCustomer.Number(),
+            Address: self.newDataForCustomer.Address()
+        };
+        ajaxHelper(customersUri + customer.Id, 'PUT', customer).done(function (item) {
+            console.log(customer.Name);
+            self.customers.push(item);
+        });
+    }
 }
 
 
