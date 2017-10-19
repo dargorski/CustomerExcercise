@@ -33,13 +33,13 @@
             <div class="panel-heading">
                 <h2 class="panel-title">Detail</h2>
             </div>
-            <table class="table">
-                <tr><td>Name</td><td data-bind="text: detail().Name"></td></tr>
-                <tr><td>Surname</td><td data-bind="text: detail().Surname"></td></tr>
-                <tr><td>Number</td><td data-bind="text: detail().Number"></td></tr>
-                <tr><td>Address</td><td data-bind="text: detail().Address"></td></tr>
+            <div class="panel-body">
+                <input type="text" class="form-control" id="inputName" data-bind="value: detail().Name" />
+                <input type="text" class="form-control" id="inputName" data-bind="value: detail().Surname" />
+                <input type="text" class="form-control" id="inputName" data-bind="value: detail().Number" />
+                <input type="text" class="form-control" id="inputName" data-bind="value: detail().Surname" />
                 
-            </table>
+            </div>
         </div>
     </div>
 
